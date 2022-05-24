@@ -1,0 +1,24 @@
+version: "1.0"
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    container_name: test-php8
+    depends_on:
+      - db
+    image: php:8.0-apache
+    ports:
+      - "8004:80"
+  db:
+    container_name: test-mysql8
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: boxbilling
+      MYSQL_USER: foo
+      MYSQL_PASSWORD: foo
+    ports:
+      - 3306:3306
+    
